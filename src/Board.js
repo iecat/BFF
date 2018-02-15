@@ -11,14 +11,14 @@ export default class Board extends React.Component
 
         super();
         this.state = {
-            noColumns: 6,
+            noColumns: 7,
             noRows: 7,
             squares: [],
             fassolliniPos: 13,
             cherryPos: 31,
             score: 0,
             agataPositions: [],
-            levelUp: false
+            level: 1
         }
 
 
@@ -33,7 +33,7 @@ export default class Board extends React.Component
 
     componentWillMount() {
         document.addEventListener("keydown", this.onKeyPressed.bind(this));
-        this.timer = setInterval(this.moveAgatitaLaBrujita, 200);         
+        this.timer = setInterval(this.moveAgatitaLaBrujita, 400);         
     }
 
     componentDidMount() {
@@ -59,7 +59,7 @@ export default class Board extends React.Component
         clearInterval(this.timer);
     }
 
-    componentWillUpdate()
+    componentDidUpdate()
     {
         // if(this.state.score == 10 && !this.state.levelUp)
         // {
@@ -68,6 +68,16 @@ export default class Board extends React.Component
         //                 clearInterval(this.timer);
         //     this.timer = setInterval(this.moveAgatitaLaBrujita, 100);
         // } 
+
+        if(this.state.score == (15 * this.state.level))
+        {
+            this.levelUp();
+        }
+        // if(this.state.score == 30 && this.state.level == 2)
+        // {
+        //     this.levelUp();
+        // }
+
   
     }
 
@@ -87,12 +97,18 @@ export default class Board extends React.Component
          }
 
         return(
-            <div className="board-content" >
-                {board}
-                <div>
-                    Big Fassollini, you caught {this.state.score} X 2 cherries
+            <div>
+                <div className="board-content" >
+                    {board}
                 </div>
-            </div>)
+                <div>
+                    Level : {this.state.level}
+                </div>
+                    <div>
+                        Big Fassollini, you caught {this.state.score} X 2 cherries
+                    </div>
+            </div>
+            )
 
      }
 
@@ -190,7 +206,7 @@ export default class Board extends React.Component
     isFelipeInsideSquare(newPos, currentPosition)
      {
         // check boundaries :  up and down
-        if(newPos <0 || newPos > 41)
+        if(newPos <0 || newPos > this.state.noColumns*this.state.noRows -1)
         {
             return false;
         }
@@ -373,6 +389,7 @@ export default class Board extends React.Component
 
     levelUp()
     {
+        const newLevel = this.state.level +1;
         var newColumns =  this.state.noColumns + 1;
         var newRows = this.state.noRows + 1;
         var newAgatitaPositions = this.state.agataPositions;        
@@ -389,7 +406,9 @@ export default class Board extends React.Component
         this.setState({
             squares: newSqares,
             agataPositions: newAgatitaPositions,
-            levelUp: true
+            level: newLevel
+            // noColumns: newColumns,
+            // noRows: newRows
         });
     } 
 

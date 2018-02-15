@@ -79,7 +79,7 @@ export default class App extends React.Component
         return (
             <div>
                 <Menu />
-                <Carousel caroulseItemsData={this.state.carouselItems} />
+                {/*<Carousel caroulseItemsData={this.state.carouselItems} />*/}
                 {/*<Router>*/}
                     <Route exact path="/" render={()=><Home {...homeProps}/>} />
                     <Route path="/detail/:id" render={(props)=><Detail {...props} allItems ={this.state.mostRecentItems}/>} />

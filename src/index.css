@@ -215,21 +215,67 @@
 .board-cell
 {
     float:left;
-    border:1px solid lightsalmon;
-    width: 50px;
-    height: 50px;
+   /* border:1px solid lightsalmon;*/
+    width: 70px;
+    height: 70px;
+    font-size: 70px;
+    color:lightsalmon;
+     /*text-align:center; */
+    /*vertical-align:middle;*/
     
 }
+
+div.board-content div:nth-child(even) div:nth-child(odd):not(.cherry)
+{
+       background-image: url('./resources/bg_1.png');
+           background-repeat: repeat-x;
+}
+div.board-content div:nth-child(even) div:nth-child(even):not(.cherry)
+{
+     background-image: url('./resources/bg_4.png');
+     background-repeat: repeat-x;
+}
+
+
+div.board-content div:nth-child(odd) div:nth-child(even):not(.cherry)
+{
+    background-image: url('./resources/bg_1.png');
+        background-repeat: repeat-x;
+}
+div.board-content div:nth-child(odd) div:nth-child(odd):not(.cherry)
+{
+    background-image: url('./resources/bg_4.png');
+     background-repeat: repeat-x;
+}
+/*div.board-content  div.board-row:nth-of-type(1) {
+    border-top:5px solid lightgray;
+}
+div.board-content div.board-row:last-child {
+    border-top:5px solid lightgray;
+}*/
+
+
+
+/*div.board-content div:nth-child(odd)
+{
+    color: Red;
+}*/
 
 .board-content
 {
     margin-top: 30px;
+    margin-left: auto;
+	margin-right: auto;
+	max-width: 490px;
+	float: none;
+    border:4px solid lightgray;
+
 }
 
 .snake-head
 {
     /*background-color: green;*/
-   background-image: url('./resources/fassolinni.jpg');
+   background-image: url('./resources/filipe_69x69.jpg') !important;
    /*background-image: url('./resources/bun.gif');*/
     background-repeat: no-repeat;
         background-position: center; 
@@ -237,15 +283,15 @@
 
 .cherry
 {
-    background-image: url('./resources/cherry.png');
+    background-image: url('./resources/cherry11_70x70.png') !important;
      background-repeat: no-repeat;
-         background-position: center; 
-    /*background-color: red; */
+    background-position: center;
+    background-color: rgb(247,244,237);
 }
 
 .la-bruja
 {
-    background-image: url('./resources/agata.jpg');
+    background-image: url('./resources/agata_69x69.jpg') !important;
     background-repeat: no-repeat;
     background-position: center; 
 }
@@ -272,4 +318,9 @@
     height: 300px;
     margin-top:50px;
 
+}
+
+body
+{
+    overflow: hidden;
 }
