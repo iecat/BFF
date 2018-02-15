@@ -229,8 +229,8 @@
 .snake-head
 {
     /*background-color: green;*/
-   /* background-image: url('./resources/fassolinni.jpg'); */
-   background-image: url('./resources/bun.gif');
+   background-image: url('./resources/fassolinni.jpg');
+   /*background-image: url('./resources/bun.gif');*/
     background-repeat: no-repeat;
         background-position: center; 
 }
