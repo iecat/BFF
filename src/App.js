@@ -81,16 +81,14 @@ export default class App extends React.Component
                 <Menu />
                 {/*<Carousel caroulseItemsData={this.state.carouselItems} />*/}
                 {/*<Router>*/}
-                    <Route exact path="/" render={()=><Home {...homeProps}/>} />
+                    {/*<Route exact path="/" render={()=><Home {...homeProps}/>} />*/}
                     <Route path="/detail/:id" render={(props)=><Detail {...props} allItems ={this.state.mostRecentItems}/>} />
                     <Route path="/viewall" render={()=><ViewMore/>}/>
                     <Route path="/login" render={()=><Login/>}/>
                     <Route path="/table" render={()=><Table noColumns={this.state.tableNoColumn} allHeaders={this.state.headers} addColumn={this.addColumn} deleteColumn={this.deleteColumn}  />}/>
                     <Route path="/game" render={()=><Board openPopUp={(m)=>this.openGameModalwithMessage(m)}/>}/>
                 {/*</Router>*/}
-                <Modal show={this.state.isOpen} onClose={this.toggleModal} onSave={this.onModalSave} handleOnChange={(evt)=>this.onChangeInputValue(evt)}>
-                        Here's some content for the modal
-        
+                <Modal show={this.state.isOpen} onClose={this.toggleModal} onSave={this.onModalSave} handleOnChange={(evt)=>this.onChangeInputValue(evt)}>      
                 </Modal>
                 <ModalGame show={this.state.isGameDialogOpen} onClose={this.toggleGameModal} isSuccess= {this.state.successMessage}>   
                 </ModalGame>
