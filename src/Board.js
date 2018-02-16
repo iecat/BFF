@@ -61,24 +61,10 @@ export default class Board extends React.Component
 
     componentDidUpdate()
     {
-        // if(this.state.score == 10 && !this.state.levelUp)
-        // {
-
-        //     this.levelUp();
-        //                 clearInterval(this.timer);
-        //     this.timer = setInterval(this.moveAgatitaLaBrujita, 100);
-        // } 
-
         if(this.state.score == (15 * this.state.level))
         {
             this.levelUp();
-        }
-        // if(this.state.score == 30 && this.state.level == 2)
-        // {
-        //     this.levelUp();
-        // }
-
-  
+        }  
     }
 
     
@@ -97,16 +83,19 @@ export default class Board extends React.Component
          }
 
         return(
-            <div>
+            <div className="main-content">
                 <div className="board-content" >
                     {board}
                 </div>
-                <div>
-                    Level : {this.state.level}
-                </div>
+
+                <div className="board-info">
+                    <div>
+                        Level : {this.state.level}
+                    </div>
                     <div>
                         Big Fassollini, you caught {this.state.score} X 2 cherries
                     </div>
+                </div>  
             </div>
             )
 
@@ -205,26 +194,53 @@ export default class Board extends React.Component
 
     isFelipeInsideSquare(newPos, currentPosition)
      {
-        // check boundaries :  up and down
+
         if(newPos <0 || newPos > this.state.noColumns*this.state.noRows -1)
         {
             return false;
-        }
+        } 
 
-        // check left & right
         for(var i=0; i< this.state.noRows; i++)
         {
-            var pos = i*this.state.noColumns +  this.state.noColumns;
+            const leftEdgePosition = i*this.state.noColumns;
+            const rightEdgePosition = leftEdgePosition + this.state.noColumns -1;
 
-            if(currentPosition == pos && newPos == (pos -1))
+            if(currentPosition == leftEdgePosition && (newPos == leftEdgePosition-1))
             {
                 return false;
             }
-            if((currentPosition == (pos-1)) && newPos == pos)
+            
+            if(currentPosition == rightEdgePosition && (newPos == rightEdgePosition+1))
             {
                 return false;
             }
+
         }
+
+
+
+
+
+        // // check boundaries :  up and down
+        // if(newPos <0 || newPos > this.state.noColumns*this.state.noRows -1)
+        // {
+        //     return false;
+        // }
+
+        // // check left & right
+        // for(var i=0; i< this.state.noRows; i++)
+        // {
+        //     var pos = i*this.state.noColumns +  this.state.noColumns;
+
+        //     if(currentPosition == pos && newPos == (pos -1))
+        //     {
+        //         return false;
+        //     }
+        //     if((currentPosition == (pos-1)) && newPos == pos)
+        //     {
+        //         return false;
+        //     }
+        // }
 
          return true;
      }
