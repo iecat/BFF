@@ -1,0 +1,46 @@
+pipeline {
+
+	agent any
+	
+	stages {
+		stage('Checkout')
+		{
+			steps {
+				checkout([$class: 'GitSCM', 
+					branches: [[name: '*/master']], 
+					doGenerateSubmoduleConfigurations: false, 
+					extensions: [[$class: 'CleanCheckout']], 
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: 'git-credentials', url: 'https://github.com/iecat/BFF.git']]
+				])
+				sh 'make'
+			}	
+		}
+		stage ('Test')
+		{
+			print "test -----"
+			sh 'node -v'
+			sh 'npm prune'
+			sh 'npm install'
+			sh 'npm test'
+		}
+		
+		stage ('Build')
+		{
+			steps {
+				print ' building the app' 
+				sh 'npm run build'
+			}
+		}
+		
+		stage ('Publish')
+		{
+			steps {
+				print 'this step should do the publish'
+			}
+		}		
+		
+	}
+	
+}
+
