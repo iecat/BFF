@@ -25,19 +25,19 @@ pipeline {
 		stage ('Test')
 		{
 		    steps {
-    			echo "test -----"
-    			node -v
-    			npm prune
-    			npm install
-    			npm test
+    			echo "test -----";
+    			node -v;
+    			npm prune;
+    			npm install;
+    			npm test;
 		    }
 		}
 		
 		stage ('Build')
 		{
 			steps {
-				echo 'building the app' 
-				npm run build
+				echo 'building the app';
+				npm run build;
 			}
 		}
 		
