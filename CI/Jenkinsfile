@@ -5,30 +5,25 @@ pipeline {
 	stages {
 		stage('Checkout')
 		{
-			steps {
-				checkout([$class: 'GitSCM', 
-					branches: [[name: '*/master']], 
-					doGenerateSubmoduleConfigurations: false, 
-					extensions: [[$class: 'CleanCheckout']], 
-					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: 'git-credentials', url: 'https://github.com/iecat/BFF.git']]
-				])
-				sh 'make'
-			}	
+		    steps {
+		        checkout scm
+		    }
 		}
 		stage ('Test')
 		{
-			print "test -----"
-			sh 'node -v'
-			sh 'npm prune'
-			sh 'npm install'
-			sh 'npm test'
+		    steps {
+    			echo "test -----"
+    			sh 'node -v'
+    			sh 'npm prune'
+    			sh 'npm install'
+    			sh 'npm test'
+		    }
 		}
 		
 		stage ('Build')
 		{
 			steps {
-				print ' building the app' 
+				echo ' building the app' 
 				sh 'npm run build'
 			}
 		}
@@ -36,11 +31,10 @@ pipeline {
 		stage ('Publish')
 		{
 			steps {
-				print 'this step should do the publish'
+				echo 'this step should do the publish'
 			}
 		}		
 		
 	}
 	
 }
-
