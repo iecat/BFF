@@ -19,17 +19,17 @@ pipeline {
 				
 		stage('Install packages') {
 			steps {
-				npm install
+				sh 'npm install'
 			}
 		}
 		stage ('Test')
 		{
 		    steps {
     			echo "test -----";
-    			node -v;
-    			npm prune;
-    			npm install;
-    			npm test;
+    			sh 'node -v'
+    			sh 'npm prune'
+    			sh 'npm install'
+    			sh 'npm test'
 		    }
 		}
 		
@@ -37,7 +37,7 @@ pipeline {
 		{
 			steps {
 				echo 'building the app';
-				npm run build;
+				sh 'npm run build'
 			}
 		}
 		
