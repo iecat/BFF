@@ -12,42 +12,10 @@ pipeline {
                         , doGenerateSubmoduleConfigurations: false
                         , extensions                       : [[$class: 'CleanBeforeCheckout']]
                         , submoduleCfg                     : []
-                        , userRemoteConfigs                : [[
-                                                                      url: 'https://github.com/iecat/BFF.git'
-                                                              ]]
+                        , userRemoteConfigs                : [[url: 'https://github.com/iecat/BFF.git']]
                 ])
 		    }
 		}
-		stage('Install packages') {
-			steps {
-				sh 'npm install'
-			}
-		}
-		stage ('Test')
-		{
-		    steps {
-    			echo "test -----"
-    			sh 'node -v'
-    			sh 'npm prune'
-    			sh 'npm install'
-    			sh 'npm test'
-		    }
-		}
-		
-		stage ('Build')
-		{
-			steps {
-				echo ' building the app' 
-				sh 'npm run build'
-			}
-		}
-		
-		stage ('Publish')
-		{
-			steps {
-				echo 'this step should do the publish'
-			}
-		}	
 		
 	}
 	
