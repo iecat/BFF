@@ -5,9 +5,23 @@ pipeline {
 	stages {
 		stage('Checkout')
 		{
-		    steps {
-		        checkout scm
+		    steps {			
+				checkout([
+                        $class                             : 'GitSCM'
+                        , branches                         : [[name: "origin/master"]]
+                        , doGenerateSubmoduleConfigurations: false
+                        , extensions                       : [[$class: 'CleanBeforeCheckout']]
+                        , submoduleCfg                     : []
+                        , userRemoteConfigs                : [[
+                                                                      url: 'https://github.com/iecat/BFF.git'
+                                                              ]]
+                ])
 		    }
+		}
+		stage('Install packages') {
+			steps {
+				sh 'npm install'
+			}
 		}
 		stage ('Test')
 		{
@@ -33,7 +47,7 @@ pipeline {
 			steps {
 				echo 'this step should do the publish'
 			}
-		}		
+		}	
 		
 	}
 	
