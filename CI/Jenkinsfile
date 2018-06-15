@@ -15,8 +15,13 @@ pipeline {
                         , userRemoteConfigs                : [[url: 'https://github.com/iecat/BFF.git']]
                 ])
 		    }
-		}		
-
+		}
+				
+		stage('Install packages') {
+			steps {
+				sh 'npm install'
+			}
+		}
 		stage ('Test')
 		{
 		    steps {
