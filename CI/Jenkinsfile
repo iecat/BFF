@@ -5,7 +5,7 @@ pipeline {
 	stages {
 		stage('Checkout')
 		{
-		    steps {			
+		    steps {				
 				checkout([
                         $class                             : 'GitSCM'
                         , branches                         : [[name: "origin/master"]]
@@ -16,7 +16,37 @@ pipeline {
                 ])
 		    }
 		}
+				
+		stage('Install packages') {
+			steps {
+				sh 'npm install'
+			}
+		}
+		stage ('Test')
+		{
+		    steps {
+    			echo "test -----"
+    			sh 'node -v'
+    			sh 'npm prune'
+    			sh 'npm install'
+    			sh 'npm test'
+		    }
+		}
 		
+		stage ('Build')
+		{
+			steps {
+				echo ' building the app' 
+				sh 'npm run build'
+			}
+		}
+		
+		stage ('Publish')
+		{
+			steps {
+				echo 'this step should do the publish'
+			}
+		}
 	}
 	
 }
